@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import NavButton from './NavButton';
 import CurrentDate from './CurrentDate';

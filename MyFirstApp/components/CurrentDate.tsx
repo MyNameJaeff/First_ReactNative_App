@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 const CurrentDate = () => {
     useEffect(() => {
@@ -11,7 +11,6 @@ const CurrentDate = () => {
 
     const [date, setDate] = useState(new Date());
     const [startDate, setStartDate] = useState(new Date(date.getFullYear(), 0, 1));
-    const [hasError, setErrorFlag] = useState(false);
 
     let days = Math.floor((date.getTime() - startDate.getTime()) /
         (24 * 60 * 60 * 1000));

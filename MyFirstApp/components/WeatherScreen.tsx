@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Image, Pressable } from 'react-native';
-import axios, * as others from "axios";
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import axios from "axios";
 
 function WeatherDisplay({ weatherObject, cityName }: { weatherObject: any, cityName: string }) {
     if (weatherObject === null) {
@@ -8,6 +8,11 @@ function WeatherDisplay({ weatherObject, cityName }: { weatherObject: any, cityN
     } else {
         const weatherList = weatherObject.list;
         const currentWeather = weatherList.pop();
+
+        // Takes the temperatures and wind and round them to one decimal
+        let feelsLike = Math.round(currentWeather.main.feels_like * 10) / 10;
+        let temp = Math.round(currentWeather.main.temp * 10) / 10;
+        let wind = Math.round(currentWeather.wind.speed * 10) / 10;
 
         return (
             <View style={styles.weatherContainer}>
@@ -22,12 +27,12 @@ function WeatherDisplay({ weatherObject, cityName }: { weatherObject: any, cityN
                 </View>
                 <View style={styles.weatherBody}>
                     <View>
-                        <Text style={styles.bigTemp}>{currentWeather.main.temp + "°C"}</Text>
+                        <Text style={styles.bigTemp}>{temp + "°C"}</Text>
                     </View>
                     <View>
                         <Text style={styles.detailHeader}>Details</Text>
-                        <Text style={styles.textDivs}>{"Feels like: " + currentWeather.main.feels_like + "°C"}</Text>
-                        <Text style={styles.textDivs}>{"Wind speed: " + currentWeather.wind.speed + "m/s"}</Text>
+                        <Text style={styles.textDivs}>{"Feels like: " + feelsLike + "°C"}</Text>
+                        <Text style={styles.textDivs}>{"Wind speed: " + wind + "m/s"}</Text>
                         <Text style={styles.textDivs}>{"Humidity: " + currentWeather.main.humidity + "%"}</Text>
                         <Text style={styles.textDivs}>{"Pressure: " + currentWeather.main.pressure + "hPa"}</Text>
                     </View>
